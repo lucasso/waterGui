@@ -29,5 +29,10 @@ module WaterGui
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+	  config.active_record.timestamped_migrations = false
+	  config.generators do |g|
+		  g.test_framework :rspec, fixtures: false, view_specs: false, helper_specs: false, routing_specs: false, request_specs: false
+	  end
   end
 end
