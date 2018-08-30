@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: yes
+  become_method: sudo
+  tasks:
+  - include: database.yml dbname=waterGui_production dbuser=waterGui_user dbpass={{ upassword }}
+  - include: database.yml dbname=waterGui_development dbuser=wateGui_user dbpass={{ upassword }}
+  - include: database.yml dbname=waterGui_test dbuser=waterGui_user dbpass={{ upassword }}
+  - name: fix postgress access permissions
+    lineinfile:
+      path: /var/lib/pgsql/data/pg_hba.conf
+      line: "local   all             all                                     md5"
+      insertafter: "^# TYPE"
+

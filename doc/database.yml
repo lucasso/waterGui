@@ -1,0 +1,6 @@
+- name: create {{ dbname }} database
+  become_user: postgres
+  postgresql_db: name={{ dbname }}
+- name: grant access to {{ dbname }} to {{ dbuser }} user
+  become_user: postgres
+  postgresql_user: db={{ dbname }} name={{ dbuser }} password={{ dbpass }} priv=ALL
