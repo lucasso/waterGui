@@ -41,6 +41,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  	gem 'i18n-debug'
 end
 
 group :development do
@@ -61,3 +62,4 @@ gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails'
 gem 'devise'
 gem "haml-rails", "~> 1.0"
+gem 'simple_form'
