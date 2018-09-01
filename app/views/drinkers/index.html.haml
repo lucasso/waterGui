@@ -1,0 +1,9 @@
+%h1 All Users
+%p
+  - @users.each do |u|
+    %p
+      Email: #{u.email}, user_id: #{u.client_user_id}, pin:#{u.client_pin}, credits:#{u.credit},
+      = link_to "Edit", edit_drinker_url(u)
+      = link_to 'Destroy', drinker_url(u), data: { confirm: 'Are you sure?' }, method: :delete
+
+
