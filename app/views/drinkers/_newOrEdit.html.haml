@@ -1,0 +1,9 @@
+%h1
+  = pagetitle
+= simple_form_for @drinker, :url => drinker_path, html: { class: 'form-group' } do |f|
+  = f.input :client_user_id
+  = f.input :client_pin
+  = f.input :credit
+  = f.input :admin
+  = f.input :email
+  = f.button :submit, {:class => "btn btn-primary"}
