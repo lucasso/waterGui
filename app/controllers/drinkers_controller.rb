@@ -29,12 +29,18 @@ class DrinkersController < ApplicationController
 		# The cleaner way is to just initialize a new object, then check the call
 		# to save; which will be truthy on a valid model and successful save.
 		@drinker = User.new(user_params)
+		@drinker.password = user_params[:client_pin]
+
+		logger.info "tworze usera"
 		
 		if @drinker.save
 			flash[:notice] = "User was successfully created."
+			redirect_to action: "index"
+		else
+			flash[:alert] = "Failed to save user #{@drinker.errors.full_messages}"
+			logger.info "nieudane #{@drinker.errors.full_messages}"
+			respond_with @drinker
 		end
-		
-		respond_with @drinker
 	end
 	
 	def update

@@ -1,6 +1,6 @@
 %h1
   = pagetitle
-= simple_form_for @drinker, :url => drinker_path, html: { class: 'form-group' } do |f|
+= simple_form_for @drinker, :url => formurl, html: { class: 'form-group' } do |f|
   = f.input :client_user_id
   = f.input :client_pin
   = f.input :credit

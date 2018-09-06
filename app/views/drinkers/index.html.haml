@@ -1,5 +1,6 @@
 %h1 All Users
 %p
+  = link_to "New", new_drinker_url
   - @drinkers.each do |u|
     %p
       Email:x #{u.email}, user_id: #{u.client_user_id}, pin:#{u.client_pin}, credits:#{u.credit},
