@@ -63,3 +63,6 @@ gem 'jquery-rails'
 gem 'devise'
 gem "haml-rails", "~> 1.0"
 gem 'simple_form'
+
+#gem 'active_model_serializers'
+#gem 'rack-cors'

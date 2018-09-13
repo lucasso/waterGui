@@ -1,5 +1,7 @@
 class DrinkersController < ApplicationController
 
+	before_action :authenticate_user!
+
 	before_action :set_drinker, only: [:show, :edit, :update, :destroy]
 	before_action :is_admin?
 
