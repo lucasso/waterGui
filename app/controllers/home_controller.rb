@@ -3,6 +3,8 @@ class HomeController < ApplicationController
 	skip_before_action :verify_authenticity_token, only: [:get_user_by_pinid]
 	before_action :authenticate_user!, except: [:get_user_by_pinid]
 
+	layout "withmenu"
+
 	def index
 	end
 	

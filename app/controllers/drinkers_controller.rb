@@ -7,6 +7,8 @@ class DrinkersController < ApplicationController
 
 	respond_to :html, :xml, :json
 
+	layout "withmenu"
+
 	def index
 		respond_with @drinkers = User.all
 	end

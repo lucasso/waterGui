@@ -1,19 +1,31 @@
 %h1 User Panel
-%p
-  Your credits number is #{current_user.credit}
-  %br
-  - if current_user.client_user_id.nil?
-    There is no user_id set for you.
-  - else
-    Your user_id is #{"%06d" % current_user.client_user_id}
-  %br
-  - if current_user.client_pin.nil?
-    There is no PIN set for you.
-  - else
-    Your PIN is #{"%04d" % current_user.client_pin}
-  %br
-  - if current_user.admin
-    = link_to drinkers_url do
-      Edit all users data
-  - else
-    You are not an administrator
+
+%table.table.table-bordered
+  %tbody
+    %tr
+      %td E-Mail Address
+      %th{:scope => "row"}
+        = current_user.email
+    %tr
+      %td Your credits number
+      %th{:scope => "row"}
+        = current_user.credit
+    %tr
+      %td User ID
+      %th{:scope => "row"}
+        - if current_user.client_user_id.nil?
+          it is not  set
+        - else
+          #{"%06d" % current_user.client_user_id}
+    %tr
+      %td PIN
+      %th{:scope => "row"}
+        #{"%04d" % current_user.client_pin}
+    %tr
+      %td Privileges
+      %td{:scope => "row"}
+        - if current_user.admin
+          You are
+          %strong administrator
+        - else
+          You are not an administrator

@@ -1,0 +1,59 @@
+- content_for :body do
+  %nav.navbar.navbar-expand-lg.custom-navbar.fixed-top.text-white.navbar-dark
+    .container
+      Water Server
+      /- e-kursy i video-rozwiązania zadań z matematyki
+      %button.navbar-toggler{"aria-controls" => "navbarResponsive", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarResponsive", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
+      #navbarResponsive.collapse.navbar-collapse
+        %ul.navbar-nav.ml-auto
+          /%li.nav-item
+          /  %a.nav-link{:href => "#{root_path}"}
+          /    Kursy matematyczne
+          /    %span.sr-only (current)
+          /%li.nav-item
+          /  %a.nav-link{:href => "#{root_path}"}
+          /    Prześlij zadanie
+          /%li.nav-item
+          /   .active
+          /  %a.nav-link{:href => "#{root_path}"}
+          /    Prześlij zadanie
+          /    %span.sr-only (current)
+          /%li.nav-item.dropdown
+          /  %a#dropdown03.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#"} O serwisie
+          /  .dropdown-menu{"aria-labelledby" => "dropdown03"}
+          /    %a.dropdown-item{:href => root_path} Regulamin
+          /    %a.dropdown-item{:href => root_path} Polityka prywatności
+          - if user_signed_in?
+            %li.nav-item
+              = link_to 'My Panel', home_index_path, :class => "nav-link"
+            - if current_user.admin
+              %li.nav-item.dropdown
+                %a#dropdown03.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#"} Admin
+                .dropdown-menu{"aria-labelledby" => "dropdown03"}
+                  = link_to "All Users", drinkers_path, :class => "dropdown-item"
+                  = link_to "New User", new_drinker_path, :class => "dropdown-item"
+            %li.nav-item
+              = link_to 'Log out', destroy_user_session_path, method: :delete, :class => "nav-link"
+          - else
+            %li.nav-item
+              = link_to 'Log in', new_user_session_path, :class => "nav-link"
+      /    %li.nav-item
+      /      %a.nav-link{:href => "#"} Services
+      /    %li.nav-item
+      /      %a.nav-link{:href => "#"} Contact
+  / Page Content
+  .container
+    - if notice
+      %p.alert.alert-success= notice
+    - if alert
+      %p.alert.alert-danger= alert
+
+    =yield
+  / /.container
+  / Footer
+
+- content_for :stylesheets do
+  = stylesheet_link_tag 'withmenu', media: 'all', 'data-turbolinks-track': 'reload'
+
+= render template: "layouts/application"

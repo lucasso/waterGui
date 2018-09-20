@@ -10,6 +10,10 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Please review the problems below:"
+    labels:
+      user:
+        client_user_id: "User ID"
+        client_pin: "PIN"
     # Examples
     # labels:
     #   defaults:

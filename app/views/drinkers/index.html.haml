@@ -1,10 +1,26 @@
-%h1 All Users
+%h1 All Users - Admin Panel
+
 %p
-  = link_to "New", new_drinker_url
-  - @drinkers.each do |u|
-    %p
-      Email:x #{u.email}, user_id: #{u.client_user_id}, pin:#{u.client_pin}, credits:#{u.credit},
-      = link_to "Edit", edit_drinker_url(u)
-      = link_to 'Destroy', drinker_url(u), data: { confirm: 'Are you sure?' }, method: :delete
+  =button_to "Add New User", new_drinker_path, class: "btn btn-primary"
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{:scope => "col"} E-Mail
+      %th{:scope => "col"} User Id
+      %th{:scope => "col"} PIN
+      %th{:scope => "col"} Credits
+
+  %tbody
+    - @drinkers.each do |u|
+      %tr.clickable-row{"data-href"=> edit_drinker_path(u)}
+        %th{:scope => "row"}
+          = u.email
+        %td #{u.client_user_id}
+        %td #{u.client_pin}
+        %td #{u.credit}
+
+        /= link_to "Edit", edit_drinker_url(u)
+        /= link_to 'Destroy', drinker_url(u), data: { confirm: 'Are you sure?' }, method: :delete
 
 
