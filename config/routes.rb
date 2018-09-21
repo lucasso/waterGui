@@ -6,5 +6,7 @@ Rails.application.routes.draw do
 	root to: "home#index"
 	post 'getuser_idpin' => "home#get_user_by_pinid"
 
-	resources :drinkers
+	resources :drinkers do
+		resources :rfids
+	end
 end

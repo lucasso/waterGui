@@ -14,6 +14,8 @@ en:
       user:
         client_user_id: "User ID"
         client_pin: "PIN"
+        rfids:
+          number: "RFid Number (in hex)"
     # Examples
     # labels:
     #   defaults:

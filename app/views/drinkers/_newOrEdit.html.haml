@@ -6,4 +6,13 @@
   = f.input :credit
   = f.input :admin
   = f.input :email
+
+  = f.fields_for :rfids do |rfids_form|
+    %fieldset
+      %hr
+      =rfids_form.input :number
+      =rfids_form.hidden_field :_destroy
+      =link_to "remove above RFID", "#", class: "remove_fields"
+  %br
+  %hr
   = f.button :submit, {:class => "btn btn-primary"}

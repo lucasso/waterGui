@@ -18,7 +18,9 @@ class DrinkersController < ApplicationController
 	end
 	
 	def new
-		respond_with @drinker = User.new
+		@drinker = User.new
+		@drinker.rfids.build
+		respond_with @drinker
 	end
 	
 	def edit
@@ -75,7 +77,7 @@ class DrinkersController < ApplicationController
 	end
 	
 	def user_params
-		params[:user].permit(:client_user_id, :client_pin, :admin, :email, :credit)
+		params[:user].permit(:client_user_id, :client_pin, :admin, :email, :credit, rfids_attributes: [:id, :number])
 	end
 
 

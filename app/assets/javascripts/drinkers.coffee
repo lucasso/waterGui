@@ -4,7 +4,13 @@
 
 
 jQuery(document).ready ($) ->
+  console.log("strna gtowa")
   $('.clickable-row').click ->
     window.location = $(this).data('href')
     return
+  $('form').on 'click', '.remove_fields', (event) ->
+    console.log($(this).closest('fieldset'))
+    $(this).prev('input[type=hidden]').val('1')
+    $(this).closest('fieldset').hide()
+    event.preventDefault()
   return

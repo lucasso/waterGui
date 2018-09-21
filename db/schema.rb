@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3) do
+ActiveRecord::Schema.define(version: 4) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "rfids", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "number"
+    t.bigint "number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["number"], name: "index_rfids_on_number", unique: true
     t.index ["user_id"], name: "index_rfids_on_user_id"
   end
 
