@@ -2,9 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-
-jQuery(document).ready ($) ->
-  console.log("strna gtowa")
+$(document).on 'turbolinks:load', ->
+  console.log("strona gotowa")
   $('.clickable-row').click ->
     window.location = $(this).data('href')
     return

@@ -52,6 +52,9 @@ class DrinkersController < ApplicationController
 	def update
 		# Update returns truthy if the model was valid and the save successful.
 		# So it's fine to just make the call.
+
+		logger.info params
+
 		if @drinker.update(user_params)
 			flash[:notice] = "User was successfully updated."
 		end
@@ -77,7 +80,7 @@ class DrinkersController < ApplicationController
 	end
 	
 	def user_params
-		params[:user].permit(:client_user_id, :client_pin, :admin, :email, :credit, rfids_attributes: [:id, :number])
+		params[:user].permit(:client_user_id, :client_pin, :admin, :email, :credit, rfids_attributes: [:id, :number, :_destroy])
 	end
 
 

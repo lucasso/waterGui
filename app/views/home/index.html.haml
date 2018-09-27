@@ -1,31 +1,4 @@
 %h1 User Panel
 
-%table.table.table-bordered
-  %tbody
-    %tr
-      %td E-Mail Address
-      %th{:scope => "row"}
-        = current_user.email
-    %tr
-      %td Your credits number
-      %th{:scope => "row"}
-        = current_user.credit
-    %tr
-      %td User ID
-      %th{:scope => "row"}
-        - if current_user.client_user_id.nil?
-          it is not  set
-        - else
-          #{"%06d" % current_user.client_user_id}
-    %tr
-      %td PIN
-      %th{:scope => "row"}
-        #{"%04d" % current_user.client_pin}
-    %tr
-      %td Privileges
-      %td{:scope => "row"}
-        - if current_user.admin
-          You are
-          %strong administrator
-        - else
-          You are not an administrator
+=render 'drinkers/userTable', { :drinker => current_user }
+

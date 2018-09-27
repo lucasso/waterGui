@@ -15,7 +15,7 @@ class RfidsController < ApplicationController
 
 	def create
 		
-		@rfid = Rfid.new(rfid_params)
+		@rfid = @drinker.rfids.build(rfid_params)
 		
 		if @rfid.save
 			flash[:notice] = "Rfid for user #{@drinker.email} was successfully created."
@@ -23,7 +23,7 @@ class RfidsController < ApplicationController
 		else
 			flash[:alert] = "Failed to save rfid, #{@rfid.errors.full_messages}"
 			logger.info "nieudane #{@drinker.errors.full_messages}"
-			respond_with @rfid # = @drinker.rfids.build
+			respond_with @rfid #= @drinker.rfids.build
 		end
 	end
 
