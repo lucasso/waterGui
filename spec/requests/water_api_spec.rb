@@ -41,5 +41,36 @@ describe 'Water API', type: :request do
 	end
 
 
+	it 'getuser_rfid returns bad request on no params' do
+		post getuser_rfid_path, params: {}
+		expect(response).to have_http_status(:bad_request)
+	end
+
+	it 'getuser_rfid returns not_found when there is no user matching client_rfid' do
+		post getuser_rfid_path, params: { client_rfid: 777 }
+		expect(response).to have_http_status(:not_found)
+	end
+
+	it 'getuser_rfid returns credits when client_rfid matches' do
+		user = FactoryBot.create(:user, :credit => 188)
+		rfid = FactoryBot.create(:rfid, :number => 9898, :user => user)
+		post getuser_rfid_path, params: { client_rfid: 9898 }
+		expect(response).to have_http_status(:success)
+		json = JSON.parse(response.body)
+		expect(json.length).to eq 1
+		expect(json['credit']).to eq 188
+	end
+
+	it 'getuser_rfid consumes credits when consumed_credit is non-zero' do
+		user = FactoryBot.create(:user, :credit => 188)
+		rfid = FactoryBot.create(:rfid, :number => 9898, :user => user)
+		post getuser_rfid_path, params: { client_rfid: 9898, consumed_credit: 180 }
+		expect(response).to have_http_status(:success)
+		json = JSON.parse(response.body)
+		expect(json.length).to eq 1
+		expect(json['credit']).to eq 8
+	end
+
+
 end
 		

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
 	root to: "home#index"
 	post 'getuser_idpin' => "home#get_user_by_pinid"
+	post 'getuser_rfid' => "home#get_user_by_rfid"
 
 	resources :drinkers do
 		resources :rfids

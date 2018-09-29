@@ -1,0 +1,2 @@
+class RfidLoginLog < ApplicationRecord
+end

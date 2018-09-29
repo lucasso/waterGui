@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :rfid do
-    user nil
-    number 1
+    user
+    sequence(:number) { |n| 3000+n }
   end
 end
