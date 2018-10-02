@@ -23,7 +23,9 @@ class RfidsController < ApplicationController
 		else
 			flash[:alert] = "Failed to save rfid, #{@rfid.errors.full_messages}"
 			logger.info "nieudane #{@drinker.errors.full_messages}"
-			respond_with @rfid, @proposedRfids = get_unused_rfids()
+			#respond_with @rfid, @proposedRfids = get_unused_rfids()
+			@proposedRfids = get_unused_rfids()
+			render :new
 		end
 	end
 
