@@ -10,7 +10,7 @@ class RfidsController < ApplicationController
 	layout "withmenu"
 
 	def new
-		respond_with @rfid = @drinker.rfids.build
+		respond_with @rfid = @drinker.rfids.build, @proposedRfids = get_unused_rfids()
 	end
 
 	def create
@@ -23,11 +23,15 @@ class RfidsController < ApplicationController
 		else
 			flash[:alert] = "Failed to save rfid, #{@rfid.errors.full_messages}"
 			logger.info "nieudane #{@drinker.errors.full_messages}"
-			respond_with @rfid #= @drinker.rfids.build
+			respond_with @rfid, @proposedRfids = get_unused_rfids()
 		end
 	end
 
 	private
+
+	def get_unused_rfids
+		RfidLoginLog.get_last_failed(20)
+	end
 
 	def rfid_params
 		params[:rfid].permit(:number)
