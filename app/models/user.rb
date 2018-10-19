@@ -10,4 +10,8 @@ class User < ApplicationRecord
 	has_many :rfids, inverse_of: :user
 	accepts_nested_attributes_for :rfids, allow_destroy: true
 
+	validates_numericality_of :client_pin, :client_user_id
+	validates :client_pin, presence: true
+	validates :client_user_id, uniqueness: true, presence: true
+
 end

@@ -55,14 +55,17 @@ class DrinkersController < ApplicationController
 
 		logger.info params
 
-		if @drinker.update(user_params)
+		begin
+			@drinker.update(user_params)
 			flash[:notice] = "User was successfully updated."
+		rescue ActiveRecord::RecordNotFound 
+			flash[:error] = "Failed to update user"
 		end
 		
 		# respond_with is very smart / magical. It knows that only on a
 		# successful update should the location option be used as a
 		# redirect.
-		respond_with @drinker, location: root_url
+		respond_with @drinker, location: drinker_url
 	end
 	
 	def destroy
