@@ -1,11 +1,12 @@
 class HomeController < ApplicationController
 	
 	skip_before_action :verify_authenticity_token, only: [:get_user_by_pinid, :get_user_by_rfid]
-	before_action :authenticate_user!, except: [:get_user_by_pinid, :get_user_by_rfid]
+	before_action :authenticate_user!, except: [:get_user_by_pinid, :get_user_by_rfid, :index]
 
 	layout "withmenu"
 
 	def index
+		redirect_to new_user_session_path unless user_signed_in?
 	end
 	
 	def get_user_by_pinid
