@@ -63,3 +63,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem "haml-rails", "~> 1.0"
 gem 'simple_form'
+
+# security fix
+gem "loofah", ">= 2.2.3"
+
