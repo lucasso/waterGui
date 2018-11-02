@@ -8,7 +8,8 @@ gem 'rails', '~> 5.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+#gem 'puma', '~> 3.11'
+gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -41,7 +42,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  	gem 'i18n-debug'
+  # gem 'i18n-debug'
 end
 
 group :development do
@@ -67,3 +68,5 @@ gem 'simple_form'
 # security fix
 gem "loofah", ">= 2.2.3"
 
+#gem 'active_model_serializers'
+#gem 'rack-cors'

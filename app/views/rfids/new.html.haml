@@ -1,0 +1,24 @@
+%h1 Adding New RFId
+%p
+  This RFId will be assigned to user having e-mail: #{@rfid.user.email} and clientId: #{@rfid.user.client_user_id}
+
+= simple_form_for(@rfid, url: drinker_rfids_path, html: { class: 'form-group' }) do |f|
+  = f.input :number
+  = f.button :submit, {:class => "btn btn-primary"}
+
+- if !@proposedRfids.empty?
+  %p You may pick some of recently used RFids which are not assigned
+
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th{:scope => "col"} RFid Number
+        %th{:scope => "col"} Time of Use
+
+    %tbody
+      - @proposedRfids.each do |rfidLog|
+        %tr.form-update-row{"data-href"=> rfidLog.number}
+          %th{:scope => "row"}
+            = rfidLog.number
+          %td #{rfidLog.created_at.strftime("%k:%M:%S, %d %b %Y")}
+

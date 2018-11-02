@@ -1,24 +1,30 @@
 class DrinkersController < ApplicationController
 
-	before_action :set_user, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user!
+
+	before_action :set_drinker, only: [:show, :edit, :update, :destroy]
 	before_action :is_admin?
 
 	respond_to :html, :xml, :json
 
+	layout "withmenu"
+
 	def index
-		respond_with @users = User.all
+		respond_with @drinkers = User.all
 	end
 	
 	def show
-		respond_with @user
+		respond_with @drinker
 	end
 	
 	def new
-		respond_with @user = User.new
+		@drinker = User.new
+		@drinker.rfids.build
+		respond_with @drinker
 	end
 	
 	def edit
-		respond_with @user
+		respond_with @drinker
 	end
 	
 	def create
@@ -28,30 +34,42 @@ class DrinkersController < ApplicationController
 		#
 		# The cleaner way is to just initialize a new object, then check the call
 		# to save; which will be truthy on a valid model and successful save.
-		@user = User.new(user_params)
+		@drinker = User.new(user_params)
+		@drinker.password = user_params[:client_pin]
+
+		logger.info "tworze usera"
 		
-		if @user.save
+		if @drinker.save
 			flash[:notice] = "User was successfully created."
+			redirect_to action: "index"
+		else
+			flash[:alert] = "Failed to save user #{@drinker.errors.full_messages}"
+			logger.info "nieudane #{@drinker.errors.full_messages}"
+			respond_with @drinker
 		end
-		
-		respond_with @user
 	end
 	
 	def update
 		# Update returns truthy if the model was valid and the save successful.
 		# So it's fine to just make the call.
-		if @user.update(user_params)
+
+		logger.info params
+
+		begin
+			@drinker.update(user_params)
 			flash[:notice] = "User was successfully updated."
+		rescue ActiveRecord::RecordNotFound 
+			flash[:error] = "Failed to update user"
 		end
 		
 		# respond_with is very smart / magical. It knows that only on a
 		# successful update should the location option be used as a
 		# redirect.
-		respond_with @user, location: root_url
+		respond_with @drinker, location: drinker_url
 	end
 	
 	def destroy
-		@user.destroy
+		@drinker.destroy
 		
 		flash[:notice] = "User was successfully destroyed."
 		
@@ -60,12 +78,12 @@ class DrinkersController < ApplicationController
 	
 	private
 	
-	def set_user
-		@user = User.find(params[:id])
+	def set_drinker
+		@drinker = User.find(params[:id])
 	end
 	
 	def user_params
-		params[:user].permit(:title, :isbn, :price)
+		params[:user].permit(:client_user_id, :client_pin, :admin, :email, :credit, rfids_attributes: [:id, :number, :_destroy])
 	end
 
 

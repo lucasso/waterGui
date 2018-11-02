@@ -1,19 +1,4 @@
 %h1 User Panel
-%p
-  Your credits number is #{current_user.credit}
-  %br
-  - if current_user.client_user_id.nil?
-    There is no user_id set for you.
-  - else
-    Your user_id is #{"%06d" % current_user.client_user_id}
-  %br
-  - if current_user.client_pin.nil?
-    There is no PIN set for you.
-  - else
-    Your PIN is #{"%04d" % current_user.client_pin}
-  %br
-  - if current_user.admin
-    = link_to drinkers_url do
-      Edit all users data
-  - else
-    You are not an administrator
+
+=render 'drinkers/userTable', { :drinker => current_user }
+

@@ -98,8 +98,6 @@ GEM
       ruby_parser (~> 3.5)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
-    i18n-debug (1.1.1)
-      i18n (< 2)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -129,9 +127,11 @@ GEM
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    passenger (5.3.5)
+      rack
+      rake (>= 0.8.1)
     pg (1.1.2)
     popper_js (1.14.3)
-    puma (3.12.0)
     rack (2.0.5)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -248,13 +248,12 @@ DEPENDENCIES
   devise
   factory_bot_rails
   haml-rails (~> 1.0)
-  i18n-debug
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
   loofah (>= 2.2.3)
+  passenger (>= 5.0.25)
   pg (>= 0.18, < 2.0)
-  puma (~> 3.11)
   rails (~> 5.2.1)
   rspec-rails
   sass-rails (~> 5.0)
@@ -271,4 +270,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.4
+   1.16.6

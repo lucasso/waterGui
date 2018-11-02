@@ -9,9 +9,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'ac22d70beba88299e8ae0637ae6c3097eff85ad3e683096d19b6b25120d8ac370caa06ab15df39f3a77d9c7d14b6683fc67b5cc6db3327883c971babfa999344'
-	if Rails.env.production?
-		config.secret_key = ENV['DEVISE_SECRET_KEY']
-	else
+	if ! Rails.env.production?
 		config.secret_key = '5c38b7ead945f972122d9d7e1b36f6bf4559d26493199ed9b6ac0a544e22a554cac895a036c3595e5ac02849b68876f4671f121db7c4dc58291b1b4bc84636ce'
 	end
   
@@ -168,7 +166,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 6..128
+  config.password_length = 1..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly

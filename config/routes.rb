@@ -4,5 +4,10 @@ Rails.application.routes.draw do
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 	root to: "home#index"
-	resources :drinkers
+	post 'getuser_idpin' => "home#get_user_by_pinid"
+	post 'getuser_rfid' => "home#get_user_by_rfid"
+
+	resources :drinkers do
+		resources :rfids
+	end
 end
